@@ -1,6 +1,7 @@
 
 switch(1..3).
 action(tog(X)) :- switch(X).
+
 opp(on,off). opp(up,down).
 opp(X,Y) :- opp(Y,X).
 
@@ -21,9 +22,6 @@ cambio(F) :- 'h(F,V), h(F,W), V!=W.
 
 1 {o(A) : _accion(A) } 1.
 
-
-#show h/2.
-#show o/1.
 
 
 

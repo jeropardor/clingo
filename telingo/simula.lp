@@ -13,3 +13,6 @@ h(sw(X),up) :- switch(X).
     ;> o(tog(1))
 }.
 
+
+#show h/2.
+#show o/1.
