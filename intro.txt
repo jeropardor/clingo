@@ -1,0 +1,52 @@
+
+
+Profe prácticas: Pedro Cabalar, Desp.: 4.11
+https://www.dc.fi.udc.es/~cabalar/kr/
+
+
+
+
+clingo: http://potassco.org/clingo
+
+clingo --> gringo, clasp
+
+clingo [<respNum>] <file> (si pones 0, te muestra todas las soluciones)
+
+
+
+alpha --> forma normal conjuntiva
+          conjunción de disyunciones de literales
+          (p v -r)    ^   (q v s)    ^   (-p v q v r)
+         :- p, not r      :- q, s       :- not p, q, r
+         
+
+negación de la conclusión.
+
+leyes:
+x -> y   ---->   (-x v y)
+-(x ^ v)  --->   (-x v y)
+
+forma normal conjuntiva: (x v y)    ^    (x v y)
+a clingo:                -(x v y).      -(x v y).
+                     :- not x, not y.   :- not x, not y 
+                     
+combinatoria: X {t1; t2; t3} Y
+
+
+
+
+apuntes práctica 1:
+
+se puede usar #const n=x. 
+cell(R,C) :- row(R), col(C).
+
+% constructor:
+cell(c(R,C)) :- row(R), col(C)
+adj(c(R,C), c(R,C+1)) :- cell(c(R,C)), col(C+1).  % existe adyacente para cada celda y col C+1 valida
+adj(c(R,C), c(R+1,C)) :- cell(c(R,C)), row(R+1). 
+adj(X,Y) :- adj(Y,X).
+
+{black(X)} :- cell(X)
+
+reglas, y como hamil la 2 y la 3.
+show balck/1.
