@@ -5,7 +5,7 @@
 orientation(ver;hor).
 n(0..(size-1)).
 
-action(move(X,N)) :- block(X), N=-size..size.
+action(mo(X,N)) :- block(X), N=-size..size.
 
 
 
@@ -29,7 +29,7 @@ reachable(B, Y-1) :- h(bl(B,_,ver,DirN),_), reachable(B, Y), unused(DirN,Y-1).
 #program dynamic.
 
 % Auxiliar
-move(B,N) :- o(move(B,N)).
+move(B,N) :- o(mo(B,N)).
 
 % Effect axioms
 h(bl(B,Dim,Dir,DirN), N+N') :- 'h(bl(B,Dim,Dir,DirN), N'), move(B,N), N>0, 'reachable(B,N+N'+Dim).
