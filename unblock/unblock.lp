@@ -1,70 +1,42 @@
 
+orientation(ver;hor).
+n(0..(size-1)).
 
-% ------------------------------------------------------------------------------
-
-
-% block(a..z).
-action(m(B,N)) :- block(B), N=-6..6.
+action(move(X,N)) :- block(X), N=-size..size.
 
 
-% ------------------------------------------------------------------------------
 
-#program dynamic. % Transition from t-1 to 
+#program always.
+
+% casilla usada por el bloque B
+usedBy(B, DirN,N..(N+Dim)) :- h(bl(B,Dim,ver,DirN), N).
+usedBy(B, N..(N+Dim),DirN) :- h(bl(B,Dim,hor,DirN), N).
+unused(X,Y) :- not usedBy(_,X,Y), _n(X), _n(Y).
+
+reachable(B, Y)   :- h(bl(B,_,hor,DirN),_), usedBy(B,Y,DirN), _n(Y).
+reachable(B, Y+1) :- h(bl(B,_,hor,DirN),_), reachable(B, Y), unused(Y+1,DirN).
+reachable(B, Y-1) :- h(bl(B,_,hor,DirN),_), reachable(B, Y), unused(Y-1,DirN).
+
+reachable(B, Y)   :- h(bl(B,_,ver,DirN),_), usedBy(B,DirN,Y), _n(Y).
+reachable(B, Y+1) :- h(bl(B,_,ver,DirN),_), reachable(B, Y), unused(DirN,Y+1).
+reachable(B, Y-1) :- h(bl(B,_,ver,DirN),_), reachable(B, Y), unused(DirN,Y-1).
+
+
+
+#program dynamic.
 
 % Auxiliar
-% moved(B,N) :- o(m(B,N)).
+move(B,N) :- o(move(B,N)).
 
-% Axiomas de efecto
-h(bl(B),pos(X+N,Y)) :- o(m(B,N)), 'h(bl(B),pos(X,Y)).
-% h(block(B, ver), pos(X,Y+N)) :- moved(B,N), 'h(block(B, ver), pos(X,Y)).
+% Effect axioms
+h(bl(B,Dim,Dir,DirN), N+N') :- 'h(bl(B,Dim,Dir,DirN), N'), move(B,N), N>0, 'reachable(B,N+N'+Dim).
+h(bl(B,Dim,Dir,DirN), N+N') :- 'h(bl(B,Dim,Dir,DirN), N'), move(B,N), N<0, 'reachable(B,N+N').
 
-
-% Action generation
-1 { o(A) : _accion(A) } 1.
+% Executability constraints: none in this case
 
 % Inertia: c(F)= fluent F has changed
 h(F,V) :- 'h(F,V), not c(F).
 c(F) :- 'h(F,V), h(F,W), V!=W.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-% PLANNING ---------------------------------------------------------------------
-%* 
-#program initial. % At timepoint t=0
-
-h(block(b,2,1,hor), pos(0,2)).
-
-#program final. % Last timepoint t=n-1
-
-:- not goal.
-goal :- h(block(b,2,1), pos(4,2)).
-
-#show moved/2. *%
-
-
-
-
-
-%*
-...a..
-...a..
-bb.a..
-......
-c.ddd.
-c..ee.
-b=4
-*%
+% Action generation
+1 { o(A): _action(A) } 1.

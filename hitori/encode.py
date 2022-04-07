@@ -1,5 +1,5 @@
 
-# -- Exercise 1: HITORI PUZZLE -------------------------------------------------
+# -- Exercise 1: UNBLOCK PUZZLE ------------------------------------------------
 # -- author1: Jeronimo Pardo Rodriguez -  j.pardor@udc.es 
 # -- author2: Maria Martinez Sotelo    -  maria.martinezs@udc.es 
 
