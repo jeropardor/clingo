@@ -27,12 +27,6 @@ goal :- h(bl(blockGoal,_,_,_), locGoal).
 :- not goal.
 
 
-#show move/2.
-% #show usedBy/3.
-% #show unused/2.
-% #show reachable/2.
-
-
 %*
 ...a..   a -> p: 3,0  d: 2  h(3,0)
 ...a..   b -> p: 0,2  d: 1  h(2,0)

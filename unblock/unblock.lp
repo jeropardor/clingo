@@ -1,4 +1,7 @@
 
+
+
+
 orientation(ver;hor).
 n(0..(size-1)).
 
@@ -40,3 +43,8 @@ c(F) :- 'h(F,V), h(F,W), V!=W.
 
 % Action generation
 1 { o(A): _action(A) } 1.
+
+
+
+
+#show move/2.
