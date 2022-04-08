@@ -9,9 +9,9 @@ SATISFIABLE
  State 4:
   move(b,2)
  State 5:
-  move(c,3)
- State 6:
   move(a,4)
+ State 6:
+  move(c,3)
  State 7:
   move(e,-2)
  State 8:
@@ -21,19 +21,19 @@ SATISFIABLE
  State 10:
   move(i,-4)
  State 11:
-  move(l,-1)
- State 12:
-  move(g,-1)
- State 13:
   move(j,-1)
+ State 12:
+  move(l,-1)
+ State 13:
+  move(g,-1)
  State 14:
   move(d,-1)
  State 15:
   move(e,4)
  State 16:
-  move(g,1)
- State 17:
   move(d,1)
+ State 17:
+  move(g,1)
  State 18:
   move(i,2)
  State 19:

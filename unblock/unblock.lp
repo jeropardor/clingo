@@ -1,7 +1,5 @@
 
 
-
-
 orientation(ver;hor).
 n(0..(size-1)).
 
@@ -16,13 +14,19 @@ usedBy(B, DirN,N..(N+Dim)) :- h(bl(B,Dim,ver,DirN), N).
 usedBy(B, N..(N+Dim),DirN) :- h(bl(B,Dim,hor,DirN), N).
 unused(X,Y) :- not usedBy(_,X,Y), _n(X), _n(Y).
 
+% neighbour
+nh(Y, Y') :- _n(Y), _n(Y'), Y=Y'+1.
+nh(Y, Y') :- _n(Y), _n(Y'), Y=Y'-1. 
+
 reachable(B, Y)   :- h(bl(B,_,hor,DirN),_), usedBy(B,Y,DirN), _n(Y).
-reachable(B, Y+1) :- h(bl(B,_,hor,DirN),_), reachable(B, Y), unused(Y+1,DirN).
-reachable(B, Y-1) :- h(bl(B,_,hor,DirN),_), reachable(B, Y), unused(Y-1,DirN).
+% reachable(B, Y+1) :- h(bl(B,_,hor,DirN),_), reachable(B, Y), unused(Y+1,DirN).
+% reachable(B, Y-1) :- h(bl(B,_,hor,DirN),_), reachable(B, Y), unused(Y-1,DirN).
+reachable(B, Y') :- h(bl(B,_,hor,DirN),_), reachable(B, Y), unused(Y',DirN), nh(Y,Y').
 
 reachable(B, Y)   :- h(bl(B,_,ver,DirN),_), usedBy(B,DirN,Y), _n(Y).
-reachable(B, Y+1) :- h(bl(B,_,ver,DirN),_), reachable(B, Y), unused(DirN,Y+1).
-reachable(B, Y-1) :- h(bl(B,_,ver,DirN),_), reachable(B, Y), unused(DirN,Y-1).
+% reachable(B, Y+1) :- h(bl(B,_,ver,DirN),_), reachable(B, Y), unused(DirN,Y+1).
+% reachable(B, Y-1) :- h(bl(B,_,ver,DirN),_), reachable(B, Y), unused(DirN,Y-1).
+reachable(B, Y') :- h(bl(B,_,ver,DirN),_), reachable(B, Y), unused(DirN,Y'), nh(Y,Y').
 
 
 

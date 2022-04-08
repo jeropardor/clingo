@@ -11,10 +11,10 @@ SATISFIABLE
  State 5:
   move(k,-3)
  State 6:
-  move(e,2)
- State 7:
-  move(g,1)
- State 8:
   move(d,2)
+ State 7:
+  move(e,2)
+ State 8:
+  move(g,1)
  State 9:
   move(f,4)
