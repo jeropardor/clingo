@@ -8,13 +8,12 @@
 import sys
 
 
-row = 0
-blocks = dict()
-
 
 
 # GET DATA ---------------------------------------------------------------------
 
+row = 0
+blocks = dict()
 
 line = sys.stdin.readline().strip()
 line = line.strip()
